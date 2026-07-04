@@ -1,5 +1,34 @@
-# etl.py
+import csv
 from datetime import datetime
+
+NOTAS_FILE = "raw_data/202601_NFe_NotaFiscal.csv"
+
+
+def query_notes(hash_table, data_requisitada):
+
+    notas = []
+
+    with open(NOTAS_FILE, "r", encoding="iso-8859-1", newline="") as f:
+
+        cabecalho = next(csv.reader([f.readline()], delimiter=";"))
+
+        lista_offsets = hash_table[data_requisitada]
+
+        for offset in lista_offsets:
+            f.seek(offset)
+            linha_crua = f.readline()
+
+            #CORREÇÃO = trecho feito pelo gemini: transforma a linha lida em um dict
+            campos = next(csv.reader([linha_crua], delimiter=";"))
+            linha = dict(zip(cabecalho, campos)) #zip agrupa em pares usando o cabeçalho
+
+            notas.append(limpar_e_transformar_nota(linha))
+
+    return notas
+                
+
+
+
 
 def limpar_e_transformar_nota(registro_bruto):
     """

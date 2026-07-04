@@ -24,3 +24,5 @@ def initiate_dict():
             break
         
         print(f"data: {data} | offsets: {lista_offsets}")
+
+    return tabela_hash
