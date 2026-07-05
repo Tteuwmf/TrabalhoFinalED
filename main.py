@@ -6,6 +6,7 @@ from pathlib import Path
 from backend.sources.indexer import create_index_file
 from backend.sources.hash_table import initiate_dict
 from backend.sources.etl import query_notes
+from backend.sources.sort import mergesort_notas
 
 INDEX_FILE = "indices/notas_index.txt"
 
@@ -24,8 +25,10 @@ def rodar_pipeline_completo():
     
     lista_notas = query_notes(tabela_hash, data_requisitada)
 
+    notas_ordenadas = mergesort_notas(lista_notas)
+
     #print para verificar 
-    print(lista_notas)
+    print(notas_ordenadas)
 
 if __name__ == "__main__":
     rodar_pipeline_completo()

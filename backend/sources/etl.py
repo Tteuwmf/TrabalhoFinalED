@@ -8,6 +8,10 @@ def query_notes(hash_table, data_requisitada):
 
     notas = []
 
+    if data_requisitada not in hash_table:
+        print("Nenhuma nota encontrada para esta data.")
+        return notas # Retorna a lista vazia
+
     with open(NOTAS_FILE, "r", encoding="iso-8859-1", newline="") as f:
 
         cabecalho = next(csv.reader([f.readline()], delimiter=";"))
