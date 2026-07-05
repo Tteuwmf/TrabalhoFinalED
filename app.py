@@ -18,7 +18,7 @@ def carregar_sistema_de_indices():
     Esta função roda apenas UMA vez. Ela verifica o índice físico e
     carrega a Tabela Hash para a memória RAM de forma persistente.
     """
-    INDEX_FILE = "backend/indices/notas_index.txt"
+    INDEX_FILE = "indices/notas_index.txt"
     arquivo_index = Path(INDEX_FILE)
 
     # Se o índice não existir na pasta, o back-end cria ele
