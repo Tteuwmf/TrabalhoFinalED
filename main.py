@@ -3,9 +3,9 @@ import os
 
 from pathlib import Path
 
-from indexer import create_index_file
-from hash_table import initiate_dict
-from etl import query_notes
+from backend.sources.indexer import create_index_file
+from backend.sources.hash_table import initiate_dict
+from backend.sources.etl import query_notes
 
 INDEX_FILE = "indices/notas_index.txt"
 
