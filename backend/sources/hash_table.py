@@ -3,6 +3,9 @@ from collections import defaultdict
 INDEX_FILE = "indices/notas_index.txt"
 
 def initiate_dict():
+
+    # Inicializa a tabela hash (dicionário) na memória RAM
+    # A função lê o arquivo de índices e carrega os dados em um dicionário onde a chave é a data e o valor é uma lista de offsets.
      
     tabela_hash = defaultdict(list)
     print("Carregando banco de índices para a memória...")

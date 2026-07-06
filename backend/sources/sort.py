@@ -1,5 +1,7 @@
 
 def mergesort_notas(lista_notas):
+
+    # A função mergesort_notas implementa o algoritmo de ordenação Merge Sort para ordenar uma lista de notas fiscais com base no valor da nota (campo 'valor_nota') em ordem decrescente.
     
     if len(lista_notas) <= 1:
         return lista_notas

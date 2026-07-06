@@ -6,11 +6,14 @@ NOTAS_FILE = "raw_data/202601_NFe_NotaFiscal.csv"
 
 def query_notes(hash_table, data_requisitada):
 
+    # A função query_notes recebe a tabela hash e a data requisitada pelo usuário.
+    # Ela retorna uma lista de notas fiscais correspondentes à data, já limpas e transformadas em dicionários.
+
     notas = []
 
     if data_requisitada not in hash_table:
         print("Nenhuma nota encontrada para esta data.")
-        return notas # Retorna a lista vazia
+        return notas
 
     with open(NOTAS_FILE, "r", encoding="iso-8859-1", newline="") as f:
 
@@ -22,9 +25,9 @@ def query_notes(hash_table, data_requisitada):
             f.seek(offset)
             linha_crua = f.readline()
 
-            #CORREÇÃO = trecho feito pelo gemini: transforma a linha lida em um dict
+            # Transforma a linha lida em um dict
             campos = next(csv.reader([linha_crua], delimiter=";"))
-            linha = dict(zip(cabecalho, campos)) #zip agrupa em pares usando o cabeçalho
+            linha = dict(zip(cabecalho, campos)) # zip agrupa em pares usando o cabeçalho
 
             notas.append(limpar_e_transformar_nota(linha))
 

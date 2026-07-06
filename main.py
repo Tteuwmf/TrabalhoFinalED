@@ -12,6 +12,9 @@ INDEX_FILE = "indices/notas_index.txt"
 
 def rodar_pipeline_completo():
 
+    # A função rodar_pipeline_completo é responsável por executar todo o processo de criação do índice, carregamento da tabela hash e consulta das notas fiscais com base na data fornecida pelo usuário.
+    # Ela é chamada quando o usuário executa o script main.py diretamente. O frontend (app.py) não chama esta função, pois ele já possui seu próprio mecanismo de cache e carregamento de índices.
+
     arquivo_index = Path(INDEX_FILE)
 
     if not arquivo_index.is_file():

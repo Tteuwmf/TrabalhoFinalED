@@ -3,7 +3,11 @@ import csv
 NOTAS_FILE = "raw_data/202601_NFe_NotaFiscal.csv"
 
 def create_index_file():
-    # Dicionário temporário na memória para agrupar as datas
+    
+    # A função create_index_file lê o arquivo CSV de notas fiscais e cria um arquivo de índices agrupando os offsets por data.
+    # Ela é chamada apenas uma vez, quando o índice não existe na pasta "indices".
+
+
     indice_temporario = {}
 
     with open(NOTAS_FILE, "r", encoding="iso-8859-1", newline="") as f:
@@ -30,11 +34,9 @@ def create_index_file():
             else:
                 data_limpa = "1900-01-01"
 
-            # EM VEZ DE ESCREVER NO ARQUIVO AQUI, AGRUPAMOS NO DICIONÁRIO:
             if data_limpa not in indice_temporario:
                 indice_temporario[data_limpa] = []
             
-            # Adicionamos o offset convertido em string para facilitar depois
             indice_temporario[data_limpa].append(str(offset))
 
     # --- FIM DO LOOP DO CSV ---
