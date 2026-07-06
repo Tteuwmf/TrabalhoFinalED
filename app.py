@@ -6,6 +6,7 @@ import os
 from backend.sources.indexer import create_index_file
 from backend.sources.hash_table import initiate_dict
 from backend.sources.etl import query_notes
+from backend.sources.sort import mergesort_notas
 
 st.set_page_config(page_title="Ordenador de Notas Fiscais", layout="wide")
 
@@ -60,23 +61,21 @@ if botao_buscar:
     # Executa a sua função do back-end que usa f.seek()
     with st.spinner("Saltando ponteiros no disco e recuperando registros..."):
         lista_de_notas = query_notes(tabela_hash_persistente, data_digitada)
+        notas_ordenadas = mergesort_notas(lista_de_notas)
     
     # Validação se encontrou algo
-    if len(lista_de_notas) == 0:
+    if len(notas_ordenadas) == 0:
         st.warning("Nenhuma nota fiscal encontrada para esta data ou chave não indexada.")
     else:
         # Exibe métricas rápidas na tela
         col1, col2 = st.columns(2)
-        col1.metric("Total de Notas Encontradas", len(lista_de_notas))
-        
-        # Como o algoritmo de ordenação ainda não está pronto, 
-        # vamos avisar que os dados estão em ordem bruta do arquivo
-        st.info("Nota: Os dados abaixo estão na ordem original de leitura do disco. A ordenação por valor será implementada na próxima fase.")
+        col1.metric("Total de Notas Encontradas", len(notas_ordenadas))
+        st.info("As notas estão listadas em ordem decrescente de valor")
         
         # O Streamlit recebe a sua lista de dicionários do Python 
         # e transforma magicamente em uma tabela interativa rica!
         st.dataframe(
-            lista_de_notas, 
+            notas_ordenadas, 
             use_container_width=True,
             column_config={
                 "chave_nota": "Chave de Acesso",

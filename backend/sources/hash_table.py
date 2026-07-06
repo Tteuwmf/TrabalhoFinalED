@@ -3,26 +3,28 @@ from collections import defaultdict
 INDEX_FILE = "indices/notas_index.txt"
 
 def initiate_dict():
-
+     
     tabela_hash = defaultdict(list)
+    print("Carregando banco de índices para a memória...")
 
-    with open(INDEX_FILE, "r", encoding="utf-8") as f:
+    try:
+        with open(INDEX_FILE, "r", encoding="utf-8") as f:
+            for linha in f:
+                linha = linha.strip()
+                if not linha:
+                    continue
+                
+                data, offsets_agrupados = linha.split("|")
+                lista_de_inteiros = [int(off) for off in offsets_agrupados.split(",")]
+                tabela_hash[data].extend(lista_de_inteiros)
 
-        while True:
-
-            linha = f.readline()
-            if not linha:
-                break
-
-            data, offset_str = linha.strip().split(",")
-            offset = int(offset_str)
-
-            tabela_hash[data].append(offset)
-
-    for i, (data, lista_offsets) in enumerate(tabela_hash.items()):
-        if i >10:
-            break
+        primeira_data = min(tabela_hash.keys())
+        ultima_data = max(tabela_hash.keys())
+        print(f"Índice carregado! {len(tabela_hash)} dias diferentes disponíveis para busca.")
+        print(f"Período disponível para pesquisa: de {primeira_data} até {ultima_data}.")
         
-        print(f"data: {data} | offsets: {lista_offsets}")
+        return tabela_hash
 
-    return tabela_hash
+    except FileNotFoundError:
+        print("Arquivo de índice não encontrado.")
+        return {}
