@@ -39,6 +39,46 @@ O objetivo do projeto foi aplicar na prática conceitos estudados em **Estrutura
 - algoritmos de ordenação;
 - organização modular do código.
 
+## Como executar
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/Tteuwmf/TrabalhoFinalED.git
+cd TrabalhoFinalED
+```
+
+### 2. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Prepare os dados
+
+Crie as pastas:
+
+```text
+raw_data/
+indices/
+```
+
+Coloque o arquivo de notas fiscais utilizado pela aplicação dentro de `raw_data/` com o nome:
+
+```text
+202601_NFe_NotaFiscal.csv
+```
+
+O arquivo de índice será gerado pela aplicação e armazenado na pasta `indices/`.
+
+### 4. Execute a interface
+
+```bash
+streamlit run app.py
+```
+
+Após a inicialização, o Streamlit abrirá a aplicação no navegador.
+
 ## Autor
 
 **Matheus Dagostini Faccini**  
